@@ -5,8 +5,7 @@ zeroth: Efficiently get the index-0 element of an iterable.
 
 __all__ = ["zeroth"]
 
-from collections.abc import Iterable
-from typing import TypeVar
+from typing import Iterable, TypeVar
 
 T = TypeVar("T")
 
