@@ -36,7 +36,7 @@ def zeroth(x: Iterable[T], /) -> T:
     '0'
 
     >>> import numpy as np
-    >>> zeroth(np.array([1, 2, 3]))
+    >>> int(zeroth(np.array([1, 2, 3])))
     1
 
     >>> class ReverseIterable:
