@@ -41,7 +41,13 @@
       "sphinx_autodoc_typehints",
       "sphinx_copybutton",
     ]
-    test = ["numpy", "pytest >=6", "pytest-cov >=3"]
+    test = [
+      "numpy",
+      "pytest >=6",
+      "pytest-cov >=3",
+      "pytest-github-actions-annotate-failures",
+      "sybil",
+    ]
 
   [project.urls]
     "Bug Tracker" = "https://github.com/GalacticDynamics/zeroth/issues"
@@ -59,12 +65,18 @@
 
 
 [tool.pytest.ini_options]
-  addopts        = ["--showlocals", "--strict-config", "--strict-markers", "-ra"]
+  addopts = [
+    "--showlocals",
+    "--strict-config",
+    "--strict-markers",
+    "-p no:doctest",    # using sybil
+    "-ra",
+  ]
   filterwarnings = ["error"]
-  log_cli_level  = "INFO"
-  minversion     = "6.0"
-  testpaths      = ["tests"]
-  xfail_strict   = true
+  log_cli_level = "INFO"
+  minversion = "6.0"
+  testpaths = ["tests/", "docs", "src/"]
+  xfail_strict = true
 
 
 [tool.coverage]
