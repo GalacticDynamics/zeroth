@@ -43,6 +43,7 @@
     ]
     test = [
       "numpy",
+      "optional_dependencies >= 0.3",
       "pytest >=6",
       "pytest-cov >=3",
       "pytest-github-actions-annotate-failures",
@@ -118,6 +119,12 @@
     [tool.ruff.lint.per-file-ignores]
       "noxfile.py" = ["T20"]
       "tests/**"   = ["ANN", "INP001", "S101", "T20"]
+
+    [tool.ruff.lint.isort]
+      combine-as-imports = true
+      extra-standard-library = ["typing_extensions"]
+      known-first-party = ["optional_dependencies"]
+      known-local-folder = ["zeroth"]
 
 
 [tool.pylint]
