@@ -58,6 +58,13 @@ print(zeroth(ReverseIterable([1, 2, 3])))
 # 3
 ```
 
+## Q&A
+
+_Why isn't this called `first` since it gets the element with ordinality of 1?_
+
+Because that package name is already taken on PyPI. Here zeroth refers to the
+index.
+
 <!-- SPHINX-START -->
 
 <!-- prettier-ignore-start -->
