@@ -1,67 +1,89 @@
+[project]
+name = "zeroth"
+dynamic = ["version"]
+description = "Efficiently get the index-0 element of an iterable."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name = "Nathaniel Starkman", email = "nstarman@users.noreply.github.com" },
+]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python",
+  "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
+]
+license.file = "LICENSE"
+dependencies = []
+
+[project.urls]
+  "Bug Tracker" = "https://github.com/GalacticDynamics/zeroth/issues"
+  Changelog     = "https://github.com/GalacticDynamics/zeroth/releases"
+  Discussions   = "https://github.com/GalacticDynamics/zeroth/discussions"
+  Homepage      = "https://github.com/GalacticDynamics/zeroth"
+
+
 [build-system]
   build-backend = "hatchling.build"
   requires      = ["hatch-vcs", "hatchling"]
 
 
-[project]
-  authors = [
-    { name = "Nathaniel Starkman", email = "nstarman@users.noreply.github.com" },
-  ]
-  classifiers = [
-    "Development Status :: 1 - Planning",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python",
-    "Topic :: Scientific/Engineering",
-    "Typing :: Typed",
-  ]
-  dependencies = []
-  description = "Efficiently get the index-0 element of an iterable."
-  dynamic = ["version"]
-  license.file = "LICENSE"
-  name = "zeroth"
-  readme = "README.md"
-  requires-python = ">=3.9"
-
-  [project.optional-dependencies]
-    dev = ["zeroth[docs,test]"]
-    docs = [
-      "furo>=2023.08.17",
-      "myst_parser>=0.13",
-      "sphinx>=7.0",
-      "sphinx_autodoc_typehints",
-      "sphinx_copybutton",
-    ]
-    test = [
-      "numpy",
-      "optional_dependencies >= 0.3",
-      "pytest >=6",
-      "pytest-cov >=3",
-      "pytest-github-actions-annotate-failures",
-      "sybil",
-    ]
-
-  [project.urls]
-    "Bug Tracker" = "https://github.com/GalacticDynamics/zeroth/issues"
-    Changelog     = "https://github.com/GalacticDynamics/zeroth/releases"
-    Discussions   = "https://github.com/GalacticDynamics/zeroth/discussions"
-    Homepage      = "https://github.com/GalacticDynamics/zeroth"
+[dependency-groups]
+dev = [
+  "ipykernel>=6.29.5",
+  "cz-conventional-gitmoji>=0.6.1",
+  { include-group = "build" },
+  { include-group = "docs" },
+  { include-group = "lint" },
+  { include-group = "nox" },
+  { include-group = "test" },
+]
+build = [
+  "build>=1.3.0",
+]
+docs = [
+  "furo>=2023.08.17",
+  "myst_parser>=0.13",
+  "sphinx>=7.0",
+  "sphinx-autodoc-typehints>=2.3.0",
+  "sphinx-copybutton>=0.5.2",
+]
+lint = [
+  "pre-commit>=4.1.0",
+  "pylint>=3.3.8",
+]
+nox = ["nox>=2024.10.9"]
+test = [
+  "numpy>=2.0.2",
+  "optional_dependencies>=0.3",
+  "pytest>=8.4.2",
+  "pytest-cov>=6.2.1",
+  "pytest-github-actions-annotate-failures>=0.3.0",
+  "sybil[pytest]>=9.2.0",
+]
 
 
 [tool.hatch]
-  version.source = "vcs"
+  build.hooks.vcs.version-file = "src/zeroth/_version.py"
+  version.source               = "vcs"
 
-  [tool.hatch.envs.default]
-    features     = ["test"]
-    scripts.test = "pytest {args}"
+
+[tool.codespell]
+skip = "uv.lock"
+
+
+[tool.commitizen]
+  name = "cz_gitmoji"
 
 
 [tool.pytest.ini_options]
@@ -74,8 +96,8 @@
   ]
   filterwarnings = ["error"]
   log_cli_level = "INFO"
-  minversion = "6.0"
-  testpaths = ["tests/", "docs", "src/"]
+  minversion = "8.3"
+  testpaths = ["src/", "tests/", "README", "docs"]
   xfail_strict = true
 
 
