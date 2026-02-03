@@ -43,7 +43,7 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: "v0.12.2"
     hooks:
-      - id: ruff
+      - id: ruff-check
         args: ["--fix", "--show-fixes"]
       - id: ruff-format
 
@@ -60,6 +60,8 @@ repos:
     rev: "v2.4.1"
     hooks:
       - id: codespell
+        args: ["--toml", "pyproject.toml"]
+        additional_dependencies: ["tomli"]
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: "v0.10.0.1"
@@ -73,6 +75,11 @@ repos:
         language: pygrep
         entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
         exclude: .pre-commit-config.yaml
+
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
 
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: "v0.24.1"

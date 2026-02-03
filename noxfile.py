@@ -1,3 +1,7 @@
+#!/usr/bin/env -S uv run --script  # noqa: EXE001
+# /// script
+#    dependencies = ["nox", "nox_uv"]
+# ///
 """Nox setup."""
 
 import shutil
@@ -15,12 +19,12 @@ DIR = Path(__file__).parent.resolve()
 # Linting
 
 
-@session(uv_groups=["lint"], reuse_venv=True)
+@session(uv_groups=["lint"], reuse_venv=True, default=True)
 def lint(s: nox.Session, /) -> None:
     """Run the linter."""
-    precommit(s)  # reuse pre-commit session
-    pylint(s)  # reuse pylint session
-    mypy(s)  # reuse mypy session
+    s.notify("precommit")
+    s.notify("pylint")
+    s.notify("mypy")
 
 
 @session(uv_groups=["lint"], reuse_venv=True)
@@ -45,6 +49,12 @@ def mypy(s: nox.Session, /) -> None:
 # Testing
 
 
+@session(uv_groups=["test"], reuse_venv=True, default=True)
+def test(s: nox.Session, /) -> None:
+    """Run the unit and regular tests."""
+    s.notify("pytest", posargs=s.posargs)
+
+
 @session(uv_groups=["test"], reuse_venv=True)
 def pytest(s: nox.Session, /) -> None:
     """Run the unit and regular tests."""
@@ -63,3 +73,9 @@ def build(s: nox.Session, /) -> None:
         shutil.rmtree(build_path)
 
     s.run("python", "-m", "build")
+
+
+# =============================================================================
+
+if __name__ == "__main__":
+    nox.main()
