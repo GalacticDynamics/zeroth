@@ -57,7 +57,7 @@ docs = [
   "sphinx-autodoc-typehints>=2.3.0",
   "sphinx-copybutton>=0.5.2",
 ]
-lint = ["mypy>=1.19.0", "pre-commit>=4.1.0", "pylint>=3.3.8"]
+lint = ["mypy>=1.19.0", "prek>=0.5.3", "pylint>=3.3.8"]
 nox = ["nox>=2024.10.9", "nox-uv>=0.6.3"]
 test = [
   "numpy>=2.0.2",
